@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userController = require("./controllers/userController");
+const taskController = require("./controllers/taskController");
 require("./redisClient");
 
 const app = express();
@@ -15,6 +16,8 @@ mongoose.connect("mongodb://mongo:27017/userdb", {
 app.post("/user", userController.createUser);
 app.put("/user", userController.updateUser);
 app.post("/comment", userController.createComment);
+app.post("/task", taskController.createTask);
+app.post("/task/:id", taskController.getTaskById);
 app.get("/user/:id/comments", userController.getUserComments);
 app.post("/comments/create-comments", userController.createManyComments);
 app.put("/comments/update-comments", userController.updateManyComments);
